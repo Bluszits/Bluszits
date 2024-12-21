@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subir Servidor - Bluszits</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/kMVq7N4B4Sv9oeeB02tu44lvZqBr3rgM/6azLydLL+lG8aqO5Qx5f68gkAq3MlYV6xkz5e0MeyR1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <br><br>
+  <header>
+    <h1>Bluszits Servers</h1>
+    </div>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Buscar servidores...">
+      <button id="searchBtn">Buscar</button>
+    </div>
+  </header>
+
+  <section class="server-section">
+    <button class="button" id="openForm">¿Qué servidor deseas subir?</button>
+
+    <div class="form-container" id="formContainer">
+      <label for="username">Nombre de Usuario de ROBLOX</label>
+      <input type="text" id="username" placeholder="Ingresa tu usuario">
+  
+      <label for="profileUrl">URL de tu perfil de ROBLOX</label>
+      <input type="url" id="profileUrl" placeholder="Ingresa tu URL">
+  
+      <label for="game">¿De qué juego es el servidor?</label>
+      <input type="text" id="game" placeholder="Ingresa el juego">
+  
+      <label for="nickname">URL del servidor</label>
+      <input type="text" id="nickname" placeholder="Ingresa el enlace del servidor">
+  
+      <label for="country">País de residencia</label>
+      <input type="text" id="country" placeholder="Ingresa tu país">
+  
+      <label for="city">Ciudad de residencia</label>
+      <input type="text" id="city" placeholder="Ingresa tu ciudad">
+  
+      <label for="age">Edad</label>
+      <input type="number" id="age" placeholder="Ingresa tu edad" min="1">
+  
+      <button id="sendForm">Enviar</button>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    <div class="server-grid" id="serverList">
+      <div class="server-card">
+        <div class="thumbnail">
+          <img src="/img/Site-logo.webp" alt="Servidor 1">
+        </div>
+        <h3>Blox Fruit</h3>
+        <p><strong>Patrocinado por:</strong> Bluszits</p>
+        <button onclick="joinRobloxServer()">Unirse al servidor</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const openFormButton = document.getElementById("openForm");
+    const formContainer = document.getElementById("formContainer");
+    const overlay = document.getElementById("overlay");
+    const sendFormButton = document.getElementById("sendForm");
+
+    openFormButton.addEventListener("click", () => {
+      formContainer.classList.add("active");
+      overlay.classList.add("active");
+    });
+
+    overlay.addEventListener("click", () => {
+      formContainer.classList.remove("active");
+      overlay.classList.remove("active");
+    });
+
+    sendFormButton.addEventListener("click", () => {
+      const username = document.getElementById("username").value;
+      const profileUrl = document.getElementById("profileUrl").value;
+      const game = document.getElementById("game").value;
+      const nickname = document.getElementById("nickname").value;
+      const country = document.getElementById("country").value;
+      const city = document.getElementById("city").value;
+      const age = document.getElementById("age").value;
+
+      if (username && profileUrl && game && nickname && country && city && age) {
+        const whatsappMessage = `Hola! Aquí está la información del servidor:\n\nUsuario de ROBLOX: ${username}\nURL del perfil: ${profileUrl}\nJuego: ${game}\nNombre/apodo: ${nickname}\nPaís: ${country}\nCiudad: ${city}\nEdad: ${age}`;
+        const encodedMessage = encodeURIComponent(whatsappMessage);
+        const whatsappUrl = `https://wa.me/573136664187?text=${encodedMessage}`;
+        window.open(whatsappUrl, "_blank");
+      } else {
+        alert("Por favor, completa todos los campos.");
+      }
+    });
+
+    function joinRobloxServer() {
+      const robloxLink = "https://www.roblox.com/share?code=18ce2cc54fff1049be1172de256ed726&type=Server";
+      window.location.href = robloxLink;
+
+      setTimeout(() => {
+        alert("No se pudo abrir Roblox. Por favor, verifica que esté instalado y que el enlace sea correcto.");
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
